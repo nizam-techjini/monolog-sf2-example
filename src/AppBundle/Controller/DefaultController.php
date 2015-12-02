@@ -20,7 +20,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/monolog", name="monolog")
+     * @Route("/monolog-basic", name="monolog")
      * @param Request $request
      */
     public function monologAction(Request $request)
@@ -28,7 +28,8 @@ class DefaultController extends Controller
     	
     	$logger = $this->get('logger');
     	
-    	$logger->addInfo("here is the logged message");
+    	$logger->info("here is the logged message");
+    	$logger->error('An error occurred');
     	
     	return $this->render('default/monolog.html.twig');
     }

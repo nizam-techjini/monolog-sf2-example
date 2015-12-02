@@ -7,3 +7,14 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    monolog.formatter.session_request:
+        class: Monolog\Formatter\LineFormatter
+        arguments:
+            - "[%%datetime%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"
+
+    monolog.processor.session_request:
+        class: AppBundle\Monolog\Processor\SessionRequestProcessor
+        arguments:  ["@session"]
+        tags:
+            - { name: monolog.processor, method: processRecord }
